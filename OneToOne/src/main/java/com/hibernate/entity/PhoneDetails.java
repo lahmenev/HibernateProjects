@@ -8,73 +8,58 @@ import javax.persistence.*;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-@Entity(name = "employee")
-public class Employee {
+@Entity
+public class PhoneDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String firstName;
-    private String lastName;
+    private Long id;
 
-    @OneToOne(
-            mappedBy = "employee",
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
-    )
-    private Address address;
+    private String provider;
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    private String technology;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "phone_id")
+    private Phone phone;
+
+    public PhoneDetails() {
     }
 
-    public Employee() {
+    public PhoneDetails(String provider, String technology) {
+        this.provider = provider;
+        this.technology = technology;
     }
 
-    public void addAddress(Address address) {
-        address.setEmployee(this);
-        this.address = address;
-    }
-
-    public void removeAddress() {
-
-        if (address != null) {
-            address.setEmployee(null);
-            this.address = null;
-        }
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getProvider() {
+        return provider;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getTechnology() {
+        return technology;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTechnology(String technology) {
+        this.technology = technology;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 }

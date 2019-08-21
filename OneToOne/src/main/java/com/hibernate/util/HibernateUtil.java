@@ -1,7 +1,8 @@
 package com.hibernate.util;
 
-import com.hibernate.entity.Address;
-import com.hibernate.entity.Employee;
+
+import com.hibernate.entity.Phone;
+import com.hibernate.entity.PhoneDetails;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -25,11 +26,12 @@ public class HibernateUtil {
         properties.setProperty("hibernate.connection.password", "1q2w3e4r5t6y");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.current_session_context_class", "thread");
 
         Configuration configuration = new Configuration();
         configuration.setProperties(properties);
-        configuration.addAnnotatedClass(Employee.class);
-        configuration.addAnnotatedClass(Address.class);
+        configuration.addAnnotatedClass(PhoneDetails.class);
+        configuration.addAnnotatedClass(Phone.class);
         concreteSessionFactory = configuration.buildSessionFactory();
     }
 

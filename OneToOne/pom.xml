@@ -6,7 +6,11 @@
 
     <groupId>com.hibernate.examples</groupId>
     <artifactId>OneToOne</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>../OneToMany</module>
+    </modules>
 
     <dependencies>
         <dependency>
