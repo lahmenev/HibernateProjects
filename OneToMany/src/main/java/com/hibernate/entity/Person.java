@@ -19,7 +19,7 @@ public class Person {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Passport> passports = new ArrayList<>();
 
     public Person() {
@@ -27,6 +27,16 @@ public class Person {
 
     public Person(String name) {
         this.name = name;
+    }
+
+    public void addPassport(Passport passport) {
+        passports.add(passport);
+        passport.setPerson(this);
+    }
+
+    public void removePassport(Passport passport) {
+        passports.remove(passport);
+        passport.setPerson(null);
     }
 
     public Integer getId() {

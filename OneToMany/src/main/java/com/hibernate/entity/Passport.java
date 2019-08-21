@@ -1,9 +1,7 @@
 package com.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -19,6 +17,10 @@ public class Passport {
     private Integer id;
 
     private String number;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public Passport() {
     }
@@ -41,5 +43,28 @@ public class Passport {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Passport passport = (Passport) o;
+        return Objects.equals(id, passport.id) &&
+                Objects.equals(number, passport.number) &&
+                Objects.equals(person, passport.person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, person);
     }
 }
