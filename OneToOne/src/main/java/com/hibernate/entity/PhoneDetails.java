@@ -1,7 +1,6 @@
 package com.hibernate.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,8 +8,8 @@ import java.io.Serializable;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-@Entity
-public class Employee implements Serializable {
+@Entity(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +17,32 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(
+            mappedBy = "employee",
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
     private Address address;
-
-    public Employee() {
-    }
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Employee() {
+    }
+
+    public void addAddress(Address address) {
+        address.setEmployee(this);
+        this.address = address;
+    }
+
+    public void removeAddress() {
+
+        if (address != null) {
+            address.setEmployee(null);
+            this.address = null;
+        }
     }
 
     public int getId() {
