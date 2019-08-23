@@ -1,5 +1,8 @@
 package com.hibernate.util;
 
+import com.hibernate.entity.joined.Account;
+import com.hibernate.entity.joined.CreditAccount;
+import com.hibernate.entity.joined.DebitAccount;
 import com.hibernate.entity.single_table.FourWheeler;
 import com.hibernate.entity.single_table.TwoWheeler;
 import com.hibernate.entity.single_table.Vehicle;
@@ -33,13 +36,17 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
         configuration.setProperties(properties);
 
-        configuration.addAnnotatedClass(Vehicle.class);
-        configuration.addAnnotatedClass(FourWheeler.class);
-        configuration.addAnnotatedClass(TwoWheeler.class);
+//        configuration.addAnnotatedClass(Vehicle.class);
+//        configuration.addAnnotatedClass(FourWheeler.class);
+//        configuration.addAnnotatedClass(TwoWheeler.class);
+//
+//        configuration.addAnnotatedClass(Transport.class);
+//        configuration.addAnnotatedClass(FlyTransport.class);
+//        configuration.addAnnotatedClass(EarthTransport.class);
 
-        configuration.addAnnotatedClass(Transport.class);
-        configuration.addAnnotatedClass(FlyTransport.class);
-        configuration.addAnnotatedClass(EarthTransport.class);
+        configuration.addAnnotatedClass(Account.class);
+        configuration.addAnnotatedClass(CreditAccount.class);
+        configuration.addAnnotatedClass(DebitAccount.class);
 
         concreteSessionFactory = configuration.buildSessionFactory();
     }
